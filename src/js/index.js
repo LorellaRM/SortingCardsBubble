@@ -6,6 +6,9 @@ import "../assets/img/4geeks.ico";
 import "../style/index.scss";
 
 let myDrawBotton = document.querySelector("#buttonDraw");
+const suits = ["\u2666", "\u2665", "\u2660", "\u2663"];
+const number = ["A", 2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K"];
+let myInputsArray = [];
 
 myDrawBotton.addEventListener("click", myInputReciver);
 
@@ -19,34 +22,45 @@ function myInputReciver() {
   return inputValue;
 }
 
+let randomIndex = array => {
+  let radomNumber = Math.floor(Math.random() * array.length);
+  return array[radomNumber];
+};
+
 function cardsGenerator(inputValue) {
-  let myArray = [];
+  //   let myArray = [];
+  //   let suitRandomIndex = randomIndex(number);
   let myCardsContainer = document.querySelector("#cardsContainer");
-  if (myCardsContainer.parentNode == 0) {
+
+  if (!myCardsContainer.hasChildNodes()) {
     for (let numCards = 0; numCards < inputValue; numCards++) {
-      let CardElement = document.createElement("div");
+      console.log(200);
 
-      let myCard = document.createTextNode("hola");
+      let cardElement = document.createElement("div");
 
-      CardElement.appendChild(myCard);
+      cardElement.classList.add("card");
 
-      myCardsContainer.appendChild(CardElement);
+      let cardDivTop = document.createElement("div");
 
-      myArray.push(numCards);
-      console.log(myArray);
+      let cardDivMid = document.createElement("div");
+
+      let cardDivBottom = document.createElement("div");
+
+      let midCardValue = document.createTextNode("2");
+
+      cardDivMid.appendChild(midCardValue);
+
+      cardElement.appendChild(cardDivTop);
+
+      cardElement.appendChild(cardDivMid);
+
+      cardElement.appendChild(cardDivBottom);
+
+      myCardsContainer.appendChild(cardElement);
     }
-  } else {
-    myCardsContainer.removeChild(myCardsContainer.children);
+  } else if (myCardsContainer.hasChildNodes()) {
+    console.log(myCardsContainer);
+    while (myCardsContainer.hasChildNodes())
+      myCardsContainer.removeChild(myCardsContainer.firstChild);
   }
 }
-
-// myDrawBotton.addEventListener("click", cardsCreator());
-
-// function cardsCreator() {
-//   let myCardsContainer = document.querySelector("#cardsContainer");
-//   var CardElement = document.getElementById("myFirstDiv");
-//   var newCard = document.createElement("h1");
-//   var t = document.createTextNode("");
-//   newCard.appendChild(t); //This adds the text content to the h1
-//   CardElement.appendChild(newCard); //This adds the h1 into the original element
-// }
